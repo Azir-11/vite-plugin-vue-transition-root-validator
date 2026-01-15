@@ -1,4 +1,4 @@
-declare module 'virtual:vue-root-validator' {
+declare module 'virtual:vue-transition-root-validator' {
   export interface SetupOptions {
     lang?: 'en' | 'zh';
     disableAfterFirstError?: boolean;

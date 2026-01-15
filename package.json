@@ -1,7 +1,7 @@
 {
   "name": "vite-plugin-vue-transition-root-validator",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Capture Vue <Transition> runtime warnings and show actionable overlay in Vite dev.",
   "keywords": [
     "azir",

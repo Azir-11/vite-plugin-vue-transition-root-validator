@@ -75,16 +75,16 @@ type ClientReportPayload = {
  * @example
  * ```ts
  * // vite.config.ts
- * import vitePluginVueRootValidator from 'vite-plugin-vue-transition-root-validator';
+ * import vitePluginVueTransitionRootValidator from 'vite-plugin-vue-transition-root-validator';
  *
  * export default defineConfig({
  *   plugins: [
- *     vitePluginVueRootValidator()
+ *     vitePluginVueTransitionRootValidator()
  *   ]
  * });
  * ```
  */
-export default function vitePluginVueRootValidator() {
+export default function vitePluginVueTransitionRootValidator() {
   let resolved: ResolvedConfigLike;
 
   return {
@@ -139,12 +139,12 @@ export default function vitePluginVueRootValidator() {
 
     /**
      * 解析虚拟模块
-     * 处理 'virtual:vue-root-validator' 模块的导入
+     * 处理 'virtual:vue-transition-root-validator' 模块的导入
      */
     resolveId(id: string) {
-      if (id === 'virtual:vue-root-validator') {
+      if (id === 'virtual:vue-transition-root-validator') {
         // 返回一个虚拟模块 ID，加上 \0 前缀表示这是一个虚拟模块
-        return '\0virtual:vue-root-validator';
+        return '\0virtual:vue-transition-root-validator';
       }
       return null;
     },
@@ -154,7 +154,7 @@ export default function vitePluginVueRootValidator() {
      * 返回虚拟模块的代码内容
      */
     load(id: string) {
-      if (id === '\0virtual:vue-root-validator') {
+      if (id === '\0virtual:vue-transition-root-validator') {
         const clientEntryTs = fileURLToPath(new URL('./client.ts', import.meta.url));
         const clientEntryJs = fileURLToPath(new URL('./client.js', import.meta.url));
         const clientEntry = existsSync(clientEntryTs) ? clientEntryTs : clientEntryJs;
@@ -162,7 +162,7 @@ export default function vitePluginVueRootValidator() {
 
         // 返回虚拟模块代码：重新导出 client.ts 的函数
         return `
-// 虚拟模块：vue-root-validator
+// 虚拟模块：vue-transition-root-validator
 // 此模块由 vite-plugin-vue-transition-root-validator 插件自动生成
 
 import { setupVueRootValidator } from ${JSON.stringify(clientUrl)};

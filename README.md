@@ -31,7 +31,7 @@ export default defineConfig({
 ```ts
 import { createApp } from 'vue';
 import App from './App.vue';
-import { setupVueRootValidator } from 'virtual:vue-root-validator';
+import { setupVueRootValidator } from 'virtual:vue-transition-root-validator';
 
 const app = createApp(App);
 

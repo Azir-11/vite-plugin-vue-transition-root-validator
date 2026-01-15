@@ -14,14 +14,14 @@ const translations = {
 如何在项目中启用此插件：
 
 1. 在 vite.config.ts 中添加插件：
-   import vitePluginVueRootValidator from 'vite-plugin-vue-transition-root-validator';
+   import vitePluginVueTransitionRootValidator from 'vite-plugin-vue-transition-root-validator';
 
    plugins: [
-     vitePluginVueRootValidator()
+     vitePluginVueTransitionRootValidator()
    ]
 
 2. 在 src/main.ts 中初始化：
-   import { setupVueRootValidator } from 'virtual:vue-root-validator';
+   import { setupVueRootValidator } from 'virtual:vue-transition-root-validator';
 
    const app = createApp(App);
    setupVueRootValidator(app, { lang: 'zh' });
@@ -34,14 +34,14 @@ const translations = {
 How to enable this plugin in your project:
 
 1. Add plugin in vite.config.ts:
-   import vitePluginVueRootValidator from 'vite-plugin-vue-transition-root-validator';
+   import vitePluginVueTransitionRootValidator from 'vite-plugin-vue-transition-root-validator';
 
    plugins: [
-     vitePluginVueRootValidator()
+     vitePluginVueTransitionRootValidator()
    ]
 
 2. Initialize in src/main.ts:
-   import { setupVueRootValidator } from 'virtual:vue-root-validator';
+   import { setupVueRootValidator } from 'virtual:vue-transition-root-validator';
 
    const app = createApp(App);
    setupVueRootValidator(app, { lang: 'en' });

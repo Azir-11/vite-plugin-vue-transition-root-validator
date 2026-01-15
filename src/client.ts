@@ -70,7 +70,7 @@ function getViewUrlFromInstance(instance: ComponentPublicInstance | null | undef
  */
 function alreadyInstalled(): boolean {
   // eslint-disable-next-line dot-notation
-  return Boolean((globalThis as any)['__VITE_PLUGIN_VUE_ROOT_VALIDATOR_INSTALLED__']);
+  return Boolean((globalThis as any)['__VITE_PLUGIN_VUE_TRANSITION_ROOT_VALIDATOR_INSTALLED__']);
 }
 
 /**
@@ -78,7 +78,7 @@ function alreadyInstalled(): boolean {
  */
 function markInstalled() {
   // eslint-disable-next-line dot-notation
-  (globalThis as any)['__VITE_PLUGIN_VUE_ROOT_VALIDATOR_INSTALLED__'] = true;
+  (globalThis as any)['__VITE_PLUGIN_VUE_TRANSITION_ROOT_VALIDATOR_INSTALLED__'] = true;
 }
 
 /**
@@ -199,7 +199,7 @@ function resendLog(msg: string, instance: ComponentPublicInstance | null, trace:
  * @example
  * ```ts
  * import { createApp } from 'vue';
- * import { setupVueRootValidator } from 'virtual:vue-root-validator';
+ * import { setupVueRootValidator } from 'virtual:vue-transition-root-validator';
  * import App from './App.vue';
  *
  * const app = createApp(App);
