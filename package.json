@@ -1,7 +1,7 @@
 {
   "name": "vite-plugin-vue-transition-root-validator",
   "type": "module",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Capture Vue <Transition> runtime warnings and show actionable overlay in Vite dev.",
   "keywords": [
     "azir",
@@ -30,14 +30,19 @@
         "types": "./dist/index.d.cts",
         "default": "./dist/index.cjs"
       }
+    },
+    "./client": {
+      "types": "./dist/client.d.ts",
+      "import": "./dist/client.js"
     }
   },
   "scripts": {
-    "build": "tsdown src/index.ts --format esm,cjs --dts --sourcemap --clean && mv dist/index-*.d.ts dist/index.d.ts && mv dist/index-*.d.cts dist/index.d.cts && tsdown src/client.ts --format esm --dts --sourcemap --no-clean && publint",
+    "build": "tsdown src/index.ts --format esm,cjs --dts --sourcemap --clean && mv dist/index-*.d.ts dist/index.d.ts && mv dist/index-*.d.cts dist/index.d.cts && tsdown src/client.ts --format esm --dts --sourcemap --no-clean && mv dist/client-*.d.ts dist/client.d.ts && publint",
     "test": "vitest run",
     "typecheck": "tsc -p tsconfig.json",
-    "verify": "npm run build && attw --pack ."
+    "verify": "pnpm run build && attw --pack ."
   },
+  "packageManager": "pnpm@10.14.0",
   "peerDependencies": {
     "vite": ">=4.0.0",
     "vue": ">=3.0.0"

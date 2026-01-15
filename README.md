@@ -4,7 +4,7 @@
 ## 安装
 
 ```bash
-npm i -D vite-plugin-vue-transition-root-validator
+pnpm i -D vite-plugin-vue-transition-root-validator
 ```
 
 ## 使用
@@ -31,7 +31,7 @@ export default defineConfig({
 ```ts
 import { createApp } from 'vue';
 import App from './App.vue';
-import { setupVueRootValidator } from 'virtual:vue-transition-root-validator';
+import { setupVueRootValidator } from 'vite-plugin-vue-transition-root-validator/client';
 
 const app = createApp(App);
 
@@ -44,7 +44,6 @@ app.mount('#app');
 ```
 
 > 说明：overlay 的标题（message header）与正文（stack）都会跟随此处的 `lang`。
-
 
 ## 代码执行流程
 
