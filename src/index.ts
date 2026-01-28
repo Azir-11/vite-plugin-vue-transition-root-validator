@@ -31,19 +31,23 @@ type DevClientLike = {
  */
 type ResolvedConfigLike = {
   command: 'serve' | 'build' | string;
+  version?: string;
 };
 
 /**
  * 发送错误覆盖层到客户端（优先定向发送，避免首屏时广播命中不到当前 client）
  */
-function sendErrorOverlay(args: { server: DevServerLike; message: string; lang: Lang; client?: DevClientLike }) {
-  const { server, message, lang, client } = args;
+function sendErrorOverlay(args: { server: DevServerLike; message: string; lang: Lang; client?: DevClientLike; needMergeMessage: boolean }) {
+  const { server, message, lang, client, needMergeMessage } = args;
+
+  const fullMessage = needMergeMessage ? `${getMessageHeader(lang)}\n${message}` : getMessageHeader(lang);
+
   const payload = {
     type: 'error',
     err: {
-      message: getMessageHeader(lang),
-      stack: message
-    }
+      message: fullMessage,
+      stack: message,
+    },
   } as const;
 
   if (client?.send) {
@@ -86,6 +90,7 @@ type ClientReportPayload = {
  */
 export default function vitePluginVueTransitionRootValidator() {
   let resolved: ResolvedConfigLike;
+  let needMergeMessage: boolean;
 
   return {
     name: 'vite-plugin-vue-transition-root-validator',
@@ -96,6 +101,10 @@ export default function vitePluginVueTransitionRootValidator() {
      */
     configResolved(config: ResolvedConfigLike) {
       resolved = config;
+      // 判断 Vite 版本：7 以下需要把 stack 合入 message
+      const viteVersion = config.version;
+      const viteMajorVersion = viteVersion ? parseInt(viteVersion.split('.')[0], 10) : 6;
+      needMergeMessage = isNaN(viteMajorVersion) || viteMajorVersion < 7;
     },
 
     /**
@@ -129,7 +138,8 @@ export default function vitePluginVueTransitionRootValidator() {
           server,
           message: payload.message,
           lang: effectiveLang,
-          client: client as any as DevClientLike
+          client: client as any as DevClientLike,
+          needMergeMessage
         });
 
         // 回 ACK，通知客户端该消息已被处理（用于清理重试队列）
